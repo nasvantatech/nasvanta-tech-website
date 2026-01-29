@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasvanta Tech Solutions LTD - Cybersecurity Experts</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0A0A0A;
+            /* Dark blue */
+            color: #FFFFFF;
+            /* White text */
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #00FFFF;
+            /* Neon blue accent */
+        }
+
+        a:hover {
+            color: #00FF00;
+            /* Neon green on hover */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #00FFFF;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #00FF00;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #000000;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00FFFF;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #FFFFFF;
+            margin: 4px 0;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #0A0A0A;
+            padding: 20px;
+            border: 1px solid #00FFFF;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            color: #00FFFF;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #00FFFF;
+            border-radius: 5px;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+
+        .modal-content button {
+            margin-top: 10px;
+        }
+
+        .close {
+            color: #FFFFFF;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #00FF00;
+        }
+
+        .error {
+            color: #FF0000;
+            margin-top: 10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #0A0A0A, #001122);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #00FFFF;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 60px 0;
+            background-color: #000000;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #00FFFF;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background-color: #0A0A0A;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #00FFFF;
+        }
+
+        .service-card h3 {
+            color: #00FFFF;
+            margin-bottom: 10px;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose {
+            padding: 60px 0;
+            background-color: #0A0A0A;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #00FFFF;
+        }
+
+        .why-choose ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .why-choose li {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .why-choose li::before {
+            content: "✓";
+            color: #00FFFF;
+            margin-right: 10px;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            padding: 60px 0;
+            background-color: #000000;
+            text-align: center;
+        }
+
+        .contact-cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #00FFFF;
+        }
+
+        .contact-cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0A0A0A;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #000000;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="container">
+            <div class="logo">Nasvanta Tech Solutions LTD</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-choose">Why Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="btn" onclick="openLoginModal()">Worker Login</button></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Worker Login</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button class="btn" onclick="authenticate()">Login</button>
+            <p class="error" id="errorMsg"></p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1>Secure Your Digital Future</h1>
+            <p>Expert cybersecurity solutions to protect your business from threats.</p>
+            <button class="btn" onclick="scrollToContact()">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Threat Detection</h3>
+                    <p>Advanced monitoring to identify and neutralize cyber threats in real-time.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Network Security</h3>
+                    <p>Comprehensive firewalls and encryption to safeguard your infrastructure.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Incident Response</h3>
+                    <p>Rapid recovery and analysis services for breaches and attacks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose" class="why-choose">
+        <div class="container">
+            <h2>Why Choose Nasvanta?</h2>
+            <ul>
+                <li>Over 10 years of experience in cybersecurity.</li>
+                <li>Certified experts with industry-leading tools.</li>
+                <li>24/7 support and proactive threat management.</li>
+                <li>Tailored solutions for businesses of all sizes.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Call-to-Action -->
+    <section id="contact" class="contact-cta">
+        <div class="container">
+            <h2>Ready to Protect Your Business?</h2>
+            <p>Contact us today for a free consultation.</p>
+            <button class="btn">Contact Us</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nasvanta Tech Solutions LTD. All rights reserved. | <a href="#">Privacy Policy</a> | <a
+                    href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll to contact section
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Open login modal
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        // Close login modal
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('errorMsg').textContent = '';
+        }
+
+        // Authenticate user (demo only - hardcoded credentials)
+        function authenticate() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            // Hardcoded demo credentials (change in production)
+            if (username === 'worker' && password === 'secure123') {
+                alert('Login successful! Redirecting to dashboard...');
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            } else {
+                errorMsg.textContent = 'Invalid username or password.';
+            }
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeLoginModal();
+            }
+        };
+    </script>
+</body>
+
+</html>
